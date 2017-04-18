@@ -316,6 +316,9 @@ properties.
 
 # Images
 
+Images aren't terribly useful on their own.  Generally you should also
+create an `Item` to go along with the `Image`.
+
 ## Get All Images
 
 ```python
