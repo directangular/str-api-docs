@@ -437,11 +437,12 @@ used to get a new access token in the future:</p>
     <span class="s">'refresh_token'</span><span class="p">:</span> <span class="n">REFRESH_TOKEN</span>
 <span class="p">}</span>
 <span class="n">res</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">oauth_url</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
-<span class="k">if</span> <span class="n">res</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">200</span><span class="p">:</span>
-    <span class="n">resp</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
-    <span class="n">user</span> <span class="o">=</span> <span class="n">get_current_user</span><span class="p">()</span>
-    <span class="c"># save the new access/refresh tokens</span>
-    <span class="n">user</span><span class="o">.</span><span class="n">save_tokens</span><span class="p">(</span><span class="n">resp</span><span class="p">[</span><span class="s">'access_token'</span><span class="p">],</span> <span class="n">resp</span><span class="p">[</span><span class="n">refresh_token</span><span class="s">'])</span><span class="err">
+<span class="k">if</span> <span class="n">res</span><span class="o">.</span><span class="n">status_code</span> <span class="o">!=</span> <span class="mi">200</span><span class="p">:</span>
+    <span class="k">raise</span> <span class="n">AuthenticationError</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
+<span class="n">resp</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
+<span class="n">user</span> <span class="o">=</span> <span class="n">get_current_user</span><span class="p">()</span>
+<span class="c"># save the new access/refresh tokens</span>
+<span class="n">user</span><span class="o">.</span><span class="n">save_tokens</span><span class="p">(</span><span class="n">resp</span><span class="p">[</span><span class="s">'access_token'</span><span class="p">],</span> <span class="n">resp</span><span class="p">[</span><span class="n">refresh_token</span><span class="s">'])</span><span class="err">
 </span></code></pre>
 <blockquote>
 <p>Generally you&rsquo;ll only do the refresh if a regular request returns an
