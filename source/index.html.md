@@ -316,9 +316,6 @@ properties.
 
 # Images
 
-Images aren't terribly useful on their own.  Generally you should also
-create an `Item` to go along with the `Image`.
-
 ## Get All Images
 
 ```python
@@ -369,8 +366,10 @@ data = json.loads(res.content)
 print data['image_thumbnail'], data['pk']
 ```
 
-Create an image object by `POST`ing to `$API_BASE/images/`, providing a
-file object in the `image_full` parameter.
+You can create an image object by `POST`ing to `$API_BASE/images/`,
+providing a file object in the `image_full` parameter.  Images aren't
+terribly useful on their own.  Generally you should also create an `Item`
+to go along with the `Image`.
 
 # Item Choices (a.k.a. "styles")
 
