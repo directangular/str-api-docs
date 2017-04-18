@@ -550,9 +550,6 @@ properties.</p>
 
 <h1 id="images">Images</h1>
 
-<p>Images aren&rsquo;t terribly useful on their own.  Generally you should also
-create an <code class="prettyprint">Item</code> to go along with the <code class="prettyprint">Image</code>.</p>
-
 <h2 id="get-all-images">Get All Images</h2>
 <pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
 
@@ -594,8 +591,10 @@ response is paged.</p>
 <span class="n">data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
 <span class="k">print</span> <span class="n">data</span><span class="p">[</span><span class="s">'image_thumbnail'</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="s">'pk'</span><span class="p">]</span>
 </code></pre>
-<p>Create an image object by <code class="prettyprint">POST</code>ing to <code class="prettyprint">$API_BASE/images/</code>, providing a
-file object in the <code class="prettyprint">image_full</code> parameter.</p>
+<p>You can create an image object by <code class="prettyprint">POST</code>ing to <code class="prettyprint">$API_BASE/images/</code>,
+providing a file object in the <code class="prettyprint">image_full</code> parameter.  Images aren&rsquo;t
+terribly useful on their own.  Generally you should also create an <code class="prettyprint">Item</code>
+to go along with the <code class="prettyprint">Image</code>.</p>
 
 <h1 id="item-choices-a-k-a-styles">Item Choices (a.k.a. &ldquo;styles&rdquo;)</h1>
 
