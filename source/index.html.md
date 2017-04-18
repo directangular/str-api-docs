@@ -190,11 +190,12 @@ data = {
     'refresh_token': REFRESH_TOKEN
 }
 res = requests.post(oauth_url, data=data)
-if res.status_code == 200:
-    resp = json.loads(res.content)
-    user = get_current_user()
-    # save the new access/refresh tokens
-    user.save_tokens(resp['access_token'], resp[refresh_token'])
+if res.status_code != 200:
+    raise AuthenticationError(res)
+resp = json.loads(res.content)
+user = get_current_user()
+# save the new access/refresh tokens
+user.save_tokens(resp['access_token'], resp[refresh_token'])
 ```
 
 > Generally you'll only do the refresh if a regular request returns an
