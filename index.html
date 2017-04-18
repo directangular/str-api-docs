@@ -229,33 +229,33 @@
         <h1 id="introduction">Introduction</h1>
 
 <p>Welcome to the ShopTheRoe API! You can use our API to access ShopTheRoe API
-endpoints, allowing you to build on top of our large Direct Sales
+endpoints, allowing you to build on top of our massive Direct Sales
 ecosystem.</p>
 
 <p>You can browse the API <a href="https://shoptheroe.com/api/v2/">here</a> and view the
 full API schema <a href="https://shoptheroe.com/api/v2/schema/">here</a>.</p>
 
-<p>This guide currently only shows <code class="prettyprint">curl</code> commands to work with the API.
-These commands will all translate over to your favorite HTTP REST API
-library.</p>
+<p>We&rsquo;re working on creating proper client libraries for popular languages,
+but in the meantime you can use any off-the-shelf HTTP request library to
+get everything done that you need.  In this guide we&rsquo;re using <code class="prettyprint">python</code> and
+<code class="prettyprint">requests</code>.</p>
 
 <h1 id="important-urls">Important URLs</h1>
 
 <p>The <code class="prettyprint">API</code> and <code class="prettyprint">OAUTH</code> base urls for the staging and production sites are:</p>
 
-<ul>
-<li><p><strong>Staging</strong> (<code class="prettyprint">https://beta.shoptheroe.com</code>)</p>
+<h3 id="staging-https-beta-shoptheroe-com">Staging (<code class="prettyprint">https://beta.shoptheroe.com</code>)</h3>
 
 <ul>
 <li><code class="prettyprint">OAUTH_BASE</code> :: <code class="prettyprint">https://beta.shoptheroe.com/o/</code></li>
 <li><code class="prettyprint">API_BASE</code> :: <code class="prettyprint">https://beta.shoptheroe.com/api/v2/</code></li>
-</ul></li>
-<li><p><strong>Production</strong> (<code class="prettyprint">https://shoptheroe.com</code>)</p>
+</ul>
+
+<h3 id="production-https-shoptheroe-com">Production (<code class="prettyprint">https://shoptheroe.com</code>)</h3>
 
 <ul>
 <li><code class="prettyprint">OAUTH_BASE</code> :: <code class="prettyprint">https://shoptheroe.com/o/</code></li>
 <li><code class="prettyprint">API_BASE</code> :: <code class="prettyprint">https://shoptheroe.com/api/v2/</code></li>
-</ul></li>
 </ul>
 
 <aside class="notice">
@@ -268,7 +268,7 @@ your oauth client will be broken if you forget the trailing <code>/</code>.
 
 <h1 id="authentication">Authentication</h1>
 
-<h2 id="get-an-access-token">Get an access token</h2>
+<h2 id="get-an-access-token">Get an Access Token</h2>
 
 <p>ShopTheRoe uses API keys and oauth2 to grant access to the API. You can
 register a new ShopTheRoe API key at
@@ -296,12 +296,12 @@ what kind of app you&rsquo;re developing.</p>
 </tr>
 </tbody></table>
 
-<h3 id="implicit-grant-mobile-apps-ios-android-etc">Implicit grant (Mobile apps (iOS, Android, etc))</h3>
+<h3 id="implicit-grant-mobile-apps-ios-android-etc">Implicit Grant (Mobile apps (iOS, Android, etc))</h3>
 
 <p>Since the code in a mobile app is distributed to the user, you can&rsquo;t
 include your secret key in your code, since that would compromise your
 secret key and could result in abuse and blacklisting.  Instead, you rely
-on the resource own (the user) to grant access.  The oauth2 specification
+on the resource owner (the user) to grant access.  The oauth2 specification
 refers to this as an &ldquo;implicit&rdquo; grant type, which you can read more
 about <a href="https://tools.ietf.org/html/rfc6749#section-4.2">here</a>.</p>
 
@@ -309,12 +309,9 @@ about <a href="https://tools.ietf.org/html/rfc6749#section-4.2">here</a>.</p>
 Since this method doesn&rsquo;t include the secret key, it is a bit less secure
 and therefore doesn&rsquo;t support all of the features of other grant types.
 For example, refresh tokens are not supported when using the implicit grant
-type.  But to be clear, this is your <em>only</em> option when developing a
-mobile app.
+type.  But to be clear, the implicit grant type is your <em>only</em>
+option when developing a mobile app.
 </aside>
-
-<p>You won&rsquo;t need the secret access key <em>at all</em> while developing a mobile
-app.</p>
 
 <p>In order to request a personal access token for a user, just send them to
 the following URL:</p>
@@ -333,11 +330,13 @@ See
 an example of how to register a custom schema handler and how to parse the
 <code class="prettyprint">access_token</code> out of the URL fragment.</p>
 
-<h3 id="authorization-code-grant-server-side-web-apps">Authorization code grant (Server-side web apps)</h3>
+<h3 id="authorization-code-grant-server-side-web-apps">Authorization Code Grant (Server-side Web Apps)</h3>
 
 <blockquote>
-<p>Extract the code in your oauth callback, save it, and redirect the user
-to your app</p>
+<p>This is the redirect URI handler.  It will extract the code, exchange it
+for a set of tokens, save the tokens, and redirect the user to your app
+where the access token can be used to make authorized requests to the STR
+API.</p>
 </blockquote>
 <pre class="highlight python tab-python"><code><span class="n">OAUTH_BASE</span> <span class="o">=</span> <span class="s">'https://shoptheroe.com/o/'</span>
 <span class="n">TOKEN_URL</span> <span class="o">=</span> <span class="n">OAUTH_BASE</span> <span class="o">+</span> <span class="s">'token/'</span>
@@ -367,6 +366,40 @@ to your app</p>
     <span class="n">user</span><span class="o">.</span><span class="n">save_tokens</span><span class="p">(</span><span class="n">resp</span><span class="p">[</span><span class="s">'access_token'</span><span class="p">],</span> <span class="n">resp</span><span class="p">[</span><span class="s">'refresh_token'</span><span class="p">])</span>
     <span class="n">redirect</span><span class="p">(</span><span class="s">'/app'</span><span class="p">)</span>
 </code></pre>
+<p>For server-side apps, you&rsquo;ll use the secret access key to get a personal
+access token for the user.  The oauth2 spec refers to this as an
+&ldquo;Authorization code&rdquo; grant type, which you can read more
+about <a href="https://tools.ietf.org/html/rfc6749#section-4.1">here</a>.  This method
+offers a bit more security and features (like refresh tokens).</p>
+
+<p>As with all secret keys, you should <em>never</em> check your key in to your
+source code repo.  Instead, you can deploy it with your app using
+environment variables or similar.</p>
+
+<p>The flow for the authorization grant type is a two-step process:</p>
+
+<ol>
+<li>Send an authorization request (server responds with a <code class="prettyprint">code</code>)</li>
+<li>Send a token request using the <code class="prettyprint">code</code> from step 1 (server responds with
+an <code class="prettyprint">access_token</code>)</li>
+</ol>
+
+<p>To get the process started, just send the user to the following URL:</p>
+
+<p><code class="prettyprint">https://shoptheroe.com/o/authorize/?response_type=code&amp;client_id=$CLIENT_ID&amp;state=random_state_string&amp;redirect_uri=$REDIRECT_URI</code></p>
+
+<p>Make sure to replace <code class="prettyprint">$CLIENT_ID</code> and <code class="prettyprint">$REDIRECT_URI</code> with your client ID
+and desired redirect URI, respectively.  The <code class="prettyprint">REDIRECT_URI</code> will most
+likely be a custom endpoint in your app to handle oauth callbacks, for
+example: <code class="prettyprint">https://my-cool-app.example.com/str-cb</code>.</p>
+
+<p>Once the user authenticates and grants access to your application they&rsquo;ll
+be redirected to <code class="prettyprint">$REDIRECT_URI</code> with a <code class="prettyprint">code</code> parameter in the
+querystring.  You can then use the returned <code class="prettyprint">code</code> to get access/refresh
+tokens by posting to <code class="prettyprint">$OAUTH_BASE/token/</code> (see code example at the right).</p>
+
+<h4 id="refresh-tokens">Refresh Tokens</h4>
+
 <blockquote>
 <p>The <code class="prettyprint">access_token</code> can be used right away to make authorized API
 requests. The <code class="prettyprint">refresh_token</code>
@@ -400,30 +433,6 @@ this:</p>
         <span class="n">resp</span> <span class="o">=</span> <span class="n">_make_api_request</span><span class="p">(</span><span class="n">user</span><span class="o">.</span><span class="n">access_token</span><span class="p">,</span> <span class="n">endpoint</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">resp</span>
 </code></pre>
-<p>For server-side apps, you&rsquo;ll use the secret access key to get a personal
-access token for the user.  The oauth2 spec refers to this as an
-&ldquo;Authorization code&rdquo; grant type, which you can read more
-about <a href="https://tools.ietf.org/html/rfc6749#section-4.1">here</a>.  This method
-offers a bit more security and features (like refresh tokens).</p>
-
-<p>As with all secret keys, you should <em>never</em> check your key in to your
-source code repo.  Instead, you can deploy it with your app using
-environment variables or similar.</p>
-
-<p>To get the process started, just send the user to the following URL:</p>
-
-<p><code class="prettyprint">https://shoptheroe.com/o/authorize/?response_type=code&amp;client_id=$CLIENT_ID&amp;state=random_state_string&amp;redirect_uri=$REDIRECT_URI</code></p>
-
-<p>Make sure to replace <code class="prettyprint">$CLIENT_ID</code> and <code class="prettyprint">$REDIRECT_URI</code> with your client ID
-and desired redirect URI, respectively.  The <code class="prettyprint">REDIRECT_URI</code> will most
-likely be a custom endpoint in your app to handle oauth callbacks, for
-example: <code class="prettyprint">https://my-cool-app.example.com/str-cb</code>.</p>
-
-<p>Once the user authenticates and grants access to your application they&rsquo;ll
-be redirected to <code class="prettyprint">$REDIRECT_URI</code> with a <code class="prettyprint">code</code> parameter in the
-querystring.  You can then use the returned <code class="prettyprint">code</code> to get access/refresh
-tokens by posting to <code class="prettyprint">$OAUTH_BASE/token/</code> (see code example at the right).</p>
-
 <p>All personal access tokens have a 14-day expiration on them.  In order to
 avoid making the user re-authorize your app by clicking through the oauth
 permissions dialog again, you can use the <code class="prettyprint">refresh_token</code> that gets
@@ -432,9 +441,10 @@ returned alongside your <code class="prettyprint">access_token</code> to get a n
 <p>Most of the time you&rsquo;ll wait to refresh a token until you get an &ldquo;invalid
 token error&rdquo; with the current access token.
 See <a href="https://tools.ietf.org/html/rfc6749#section-1.5">this section</a> of the
-oauth2 spec for an example sequence diagram.</p>
+oauth2 spec for an example sequence diagram.  There&rsquo;s also an example on
+the right showing how you might do it.</p>
 
-<h2 id="use-the-access-token-to-make-requests">Use the access token to make requests</h2>
+<h2 id="use-the-access-token">Use the Access Token</h2>
 
 <blockquote>
 <p>To make an authorized request, just add an &ldquo;Authorization&rdquo; header with a
@@ -453,90 +463,173 @@ requests to the server in an HTTP header that looks like the following:</p>
 You must replace <code>&lt;token&gt;</code> with the personal access token.
 </aside>
 
-<h1 id="kittens">Kittens</h1>
+<h1 id="api-schema">API Schema</h1>
 
-<h2 id="get-all-kittens">Get All Kittens</h2>
-<pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">kittn</span>
+<p>The remainder of this document will provide details on available endpoints
+and their usage.  However, the definitive reference is the auto-generated
+API schema, <a href="https://shoptheroe.com/api/v2/schema/">here</a>.</p>
 
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="o">.</span><span class="n">kittens</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+<h1 id="items">Items</h1>
+
+<h2 id="get-all-items">Get All Items</h2>
+<pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
+
+<span class="n">api_url</span> <span class="o">=</span> <span class="s">'https://shoptheroe.com/api/v2/'</span>
+<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span><span class="s">"Authorization"</span><span class="p">:</span> <span class="s">"Bearer "</span> <span class="o">+</span> <span class="n">access_token</span><span class="p">}</span>
+<span class="n">res</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">api_url</span> <span class="o">+</span> <span class="s">'items/'</span><span class="p">,</span> <span class="n">headers</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">res</span><span class="o">.</span><span class="n">status_code</span> <span class="o">!=</span> <span class="mi">200</span><span class="p">:</span>
+    <span class="k">raise</span> <span class="n">AuthenticationError</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
+<span class="k">print</span> <span class="n">data</span><span class="p">[</span><span class="s">'results'</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s">'image'</span><span class="p">][</span><span class="s">'image_thumbnail'</span><span class="p">]</span>
 </code></pre>
-<blockquote>
-<p>The above command returns JSON structured like this:</p>
-</blockquote>
-<pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Fluffums"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"calico"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Max"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unknown"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span><span class="p">]</span><span class="w">
-</span></code></pre>
-<p>This endpoint retrieves all kittens.</p>
+<p>This endpoint retrieves all items.  You can see what the response looks
+like in <a href="https://shoptheroe.com/api/v2/items/">the API browser</a>.  The
+response is paged.</p>
 
-<h3 id="http-request">HTTP Request</h3>
+<h2 id="get-a-specific-item">Get a Specific Item</h2>
+<pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
 
-<p><code class="prettyprint">GET http://example.com/kittens/&lt;ID&gt;</code></p>
-
-<h3 id="url-parameters">URL Parameters</h3>
-
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>ID</td>
-<td>The ID of the kitten to retrieve</td>
-</tr>
-</tbody></table>
-
-<h2 id="get-a-specific-kitten">Get a Specific Kitten</h2>
-<pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">kittn</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="o">.</span><span class="n">kittens</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">api_url</span> <span class="o">=</span> <span class="s">'https://shoptheroe.com/api/v2/'</span>
+<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span><span class="s">"Authorization"</span><span class="p">:</span> <span class="s">"Bearer "</span> <span class="o">+</span> <span class="n">access_token</span><span class="p">}</span>
+<span class="n">res</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">api_url</span> <span class="o">+</span> <span class="s">'items/&lt;ITEM_ID&gt;/'</span><span class="p">,</span> <span class="n">headers</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">res</span><span class="o">.</span><span class="n">status_code</span> <span class="o">!=</span> <span class="mi">200</span><span class="p">:</span>
+    <span class="k">raise</span> <span class="n">AuthenticationError</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
+<span class="k">print</span> <span class="n">data</span><span class="p">[</span><span class="s">'image'</span><span class="p">][</span><span class="s">'image_thumbnail'</span><span class="p">]</span>
 </code></pre>
-<blockquote>
-<p>The above command returns JSON structured like this:</p>
-</blockquote>
-<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Max"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unknown"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-<p>This endpoint retrieves a specific kitten.</p>
+<p>This endpoint retrieves a specific item.</p>
 
-<h3 id="http-request">HTTP Request</h3>
+<h2 id="create-an-item">Create an Item</h2>
+<pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
 
-<p><code class="prettyprint">GET http://example.com/kittens/&lt;ID&gt;</code></p>
+<span class="n">api_url</span> <span class="o">=</span> <span class="s">'https://shoptheroe.com/api/v2/'</span>
+<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span><span class="s">"Authorization"</span><span class="p">:</span> <span class="s">"Bearer "</span> <span class="o">+</span> <span class="n">access_token</span><span class="p">}</span>
+<span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s">'itemchoice_id'</span><span class="p">:</span> <span class="n">itemchoice_id</span><span class="p">,</span>
+    <span class="s">'size_id'</span><span class="p">:</span> <span class="n">size_id</span><span class="p">,</span>
+    <span class="s">'image_id'</span><span class="p">:</span> <span class="n">image_id</span><span class="p">,</span>
+    <span class="s">'data'</span><span class="p">:</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">({</span>  <span class="c"># optional!</span>
+        <span class="s">'attributes'</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s">'Color'</span><span class="p">:</span> <span class="s">'Red'</span><span class="p">,</span>
+            <span class="s">'Collection'</span><span class="p">:</span> <span class="s">'Elegant'</span><span class="p">,</span>
+        <span class="p">}</span>
+    <span class="p">}),</span>
+<span class="p">}</span>
+<span class="n">res</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">api_url</span> <span class="o">+</span> <span class="s">'items/'</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">res</span><span class="o">.</span><span class="n">status_code</span> <span class="o">!=</span> <span class="mi">200</span><span class="p">:</span>
+    <span class="k">raise</span> <span class="n">AuthenticationError</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
+<span class="k">print</span> <span class="n">data</span><span class="p">[</span><span class="s">'image_thumbnail'</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="s">'pk'</span><span class="p">]</span>
+</code></pre>
+<p>Create an item object by <code class="prettyprint">POST</code>ing to <code class="prettyprint">$API_BASE/items/</code> with an associated
+itemchoice ID, size ID, image ID, as well as other optional item
+properties.</p>
 
-<h3 id="url-parameters">URL Parameters</h3>
+<h1 id="images">Images</h1>
 
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>ID</td>
-<td>The ID of the kitten to retrieve</td>
-</tr>
-</tbody></table>
+<h2 id="get-all-images">Get All Images</h2>
+<pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
+
+<span class="n">api_url</span> <span class="o">=</span> <span class="s">'https://shoptheroe.com/api/v2/'</span>
+<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span><span class="s">"Authorization"</span><span class="p">:</span> <span class="s">"Bearer "</span> <span class="o">+</span> <span class="n">access_token</span><span class="p">}</span>
+<span class="n">res</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">api_url</span> <span class="o">+</span> <span class="s">'images/'</span><span class="p">,</span> <span class="n">headers</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">res</span><span class="o">.</span><span class="n">status_code</span> <span class="o">!=</span> <span class="mi">200</span><span class="p">:</span>
+    <span class="k">raise</span> <span class="n">AuthenticationError</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
+<span class="k">print</span> <span class="n">data</span><span class="p">[</span><span class="s">'results'</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s">'image_thumbnail'</span><span class="p">]</span>
+</code></pre>
+<p>This endpoint retrieves all images.  You can see what the response looks
+like in <a href="https://shoptheroe.com/api/v2/images/">the API browser</a>.  The
+response is paged.</p>
+
+<h2 id="get-a-specific-image">Get a Specific Image</h2>
+<pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
+
+<span class="n">api_url</span> <span class="o">=</span> <span class="s">'https://shoptheroe.com/api/v2/'</span>
+<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span><span class="s">"Authorization"</span><span class="p">:</span> <span class="s">"Bearer "</span> <span class="o">+</span> <span class="n">access_token</span><span class="p">}</span>
+<span class="n">res</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">api_url</span> <span class="o">+</span> <span class="s">'images/&lt;IMAGE_ID&gt;/'</span><span class="p">,</span> <span class="n">headers</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">res</span><span class="o">.</span><span class="n">status_code</span> <span class="o">!=</span> <span class="mi">200</span><span class="p">:</span>
+    <span class="k">raise</span> <span class="n">AuthenticationError</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
+<span class="k">print</span> <span class="n">data</span><span class="p">[</span><span class="s">'image_thumbnail'</span><span class="p">]</span>
+</code></pre>
+<p>This endpoint retrieves a specific image.</p>
+
+<h2 id="create-an-image">Create an Image</h2>
+<pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
+
+<span class="n">api_url</span> <span class="o">=</span> <span class="s">'https://shoptheroe.com/api/v2/'</span>
+<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span><span class="s">"Authorization"</span><span class="p">:</span> <span class="s">"Bearer "</span> <span class="o">+</span> <span class="n">access_token</span><span class="p">}</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">'/tmp/my_image.png'</span><span class="p">)</span> <span class="k">as</span> <span class="n">imgfile</span><span class="p">:</span>
+    <span class="n">files</span> <span class="o">=</span> <span class="p">{</span><span class="s">'image_full'</span><span class="p">:</span> <span class="n">imgfile</span><span class="p">}</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">api_url</span> <span class="o">+</span> <span class="s">'images/'</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">,</span> <span class="n">files</span><span class="o">=</span><span class="n">files</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">res</span><span class="o">.</span><span class="n">status_code</span> <span class="o">!=</span> <span class="mi">200</span><span class="p">:</span>
+    <span class="k">raise</span> <span class="n">AuthenticationError</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
+<span class="k">print</span> <span class="n">data</span><span class="p">[</span><span class="s">'image_thumbnail'</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="s">'pk'</span><span class="p">]</span>
+</code></pre>
+<p>Create an image object by <code class="prettyprint">POST</code>ing to <code class="prettyprint">$API_BASE/images/</code>, providing a
+file object in the <code class="prettyprint">image_full</code> parameter.</p>
+
+<h1 id="item-choices-a-k-a-styles">Item Choices (a.k.a. &ldquo;styles&rdquo;)</h1>
+
+<h2 id="get-all-item-choices">Get All Item Choices</h2>
+<pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
+
+<span class="n">api_url</span> <span class="o">=</span> <span class="s">'https://shoptheroe.com/api/v2/'</span>
+<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span><span class="s">"Authorization"</span><span class="p">:</span> <span class="s">"Bearer "</span> <span class="o">+</span> <span class="n">access_token</span><span class="p">}</span>
+<span class="n">res</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">api_url</span> <span class="o">+</span> <span class="s">'itemchoices/'</span><span class="p">,</span> <span class="n">headers</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">res</span><span class="o">.</span><span class="n">status_code</span> <span class="o">!=</span> <span class="mi">200</span><span class="p">:</span>
+    <span class="k">raise</span> <span class="n">AuthenticationError</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
+<span class="k">print</span> <span class="n">data</span><span class="p">[</span><span class="s">'results'</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+</code></pre>
+<p>This endpoint retrieves all item choices.  You can see what the response looks
+like in <a href="https://shoptheroe.com/api/v2/itemchoices/">the API browser</a>.  The
+response is paged.</p>
+
+<h2 id="get-a-specific-item-choice">Get a Specific Item Choice</h2>
+<pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
+
+<span class="n">api_url</span> <span class="o">=</span> <span class="s">'https://shoptheroe.com/api/v2/'</span>
+<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span><span class="s">"Authorization"</span><span class="p">:</span> <span class="s">"Bearer "</span> <span class="o">+</span> <span class="n">access_token</span><span class="p">}</span>
+<span class="n">res</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">api_url</span> <span class="o">+</span> <span class="s">'itemchoices/&lt;ITEMCHOICE_ID&gt;/'</span><span class="p">,</span> <span class="n">headers</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">res</span><span class="o">.</span><span class="n">status_code</span> <span class="o">!=</span> <span class="mi">200</span><span class="p">:</span>
+    <span class="k">raise</span> <span class="n">AuthenticationError</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
+<span class="k">print</span> <span class="n">data</span>
+</code></pre>
+<p>This endpoint retrieves a specific item choice.</p>
+
+<h1 id="sizes">Sizes</h1>
+
+<h2 id="get-all-sizes">Get All Sizes</h2>
+<pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
+
+<span class="n">api_url</span> <span class="o">=</span> <span class="s">'https://shoptheroe.com/api/v2/'</span>
+<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span><span class="s">"Authorization"</span><span class="p">:</span> <span class="s">"Bearer "</span> <span class="o">+</span> <span class="n">access_token</span><span class="p">}</span>
+<span class="n">res</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">api_url</span> <span class="o">+</span> <span class="s">'sizes/'</span><span class="p">,</span> <span class="n">headers</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">res</span><span class="o">.</span><span class="n">status_code</span> <span class="o">!=</span> <span class="mi">200</span><span class="p">:</span>
+    <span class="k">raise</span> <span class="n">AuthenticationError</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
+<span class="k">print</span> <span class="n">data</span><span class="p">[</span><span class="s">'results'</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+</code></pre>
+<p>This endpoint retrieves all sizes.  You can see what the response looks
+like in <a href="https://shoptheroe.com/api/v2/sizes/">the API browser</a>.  The
+response is paged.</p>
+
+<h2 id="get-a-specific-size">Get a Specific Size</h2>
+<pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
+
+<span class="n">api_url</span> <span class="o">=</span> <span class="s">'https://shoptheroe.com/api/v2/'</span>
+<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span><span class="s">"Authorization"</span><span class="p">:</span> <span class="s">"Bearer "</span> <span class="o">+</span> <span class="n">access_token</span><span class="p">}</span>
+<span class="n">res</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">api_url</span> <span class="o">+</span> <span class="s">'sizes/&lt;SIZE_ID&gt;/'</span><span class="p">,</span> <span class="n">headers</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">res</span><span class="o">.</span><span class="n">status_code</span> <span class="o">!=</span> <span class="mi">200</span><span class="p">:</span>
+    <span class="k">raise</span> <span class="n">AuthenticationError</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
+<span class="k">print</span> <span class="n">data</span>
+</code></pre>
+<p>This endpoint retrieves a specific size.</p>
 
       </div>
       <div class="dark-box">
