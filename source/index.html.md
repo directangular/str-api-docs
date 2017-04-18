@@ -20,6 +20,15 @@ ecosystem.
 You can browse the API [here](https://shoptheroe.com/api/v2/) and view the
 full API schema [here](https://shoptheroe.com/api/v2/schema/).
 
+We have example projects set up for a few popular platforms that you can
+use for reference:
+
+Platform | Code
+---------|-----
+Server-side web app | [GitHub](https://github.com/directangular/str-api-demo-web)
+Android | [GitHub](https://github.com/directangular/str-api-demo-android)
+iOS | TODO
+
 We're working on creating proper client libraries for popular languages,
 but in the meantime you can use any off-the-shelf HTTP request library to
 get everything done that you need.  In this guide we're using `python` and
