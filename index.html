@@ -545,9 +545,31 @@ response is paged.</p>
 <span class="n">data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
 <span class="k">print</span> <span class="n">data</span><span class="p">[</span><span class="s">'image_thumbnail'</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="s">'pk'</span><span class="p">]</span>
 </code></pre>
-<p>Create an item object by <code class="prettyprint">POST</code>ing to <code class="prettyprint">$API_BASE/items/</code> with an associated
-itemchoice ID, size ID, image ID, as well as other optional item
-properties.</p>
+<p>Create an item object by <code class="prettyprint">POST</code>ing to <code class="prettyprint">$API_BASE/items/</code>.</p>
+
+<p>Required:</p>
+
+<ul>
+<li>itemchoice ID</li>
+<li>size ID</li>
+<li>image ID</li>
+</ul>
+
+<p>Optional:</p>
+
+<ul>
+<li>price
+
+<ul>
+<li>If not provided, minimum advertised price for the style (itemchoice)
+will be used</li>
+</ul></li>
+<li>data
+
+<ul>
+<li>JSON object of the form {&lsquo;attributes&rsquo;: {&lsquo;Key&rsquo;: &lsquo;Value&rsquo;, &hellip;}}</li>
+</ul></li>
+</ul>
 
 <h1 id="images">Images</h1>
 
