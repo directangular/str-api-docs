@@ -327,6 +327,11 @@ Create an item object by `POST`ing to `$API_BASE/items/`.
   - `data`
     - JSON object of the form `{'attributes': {'Key': 'Value', ...}}`
 
+<aside class="notice">
+Note: the wholesale price will be automatically populated based on the
+wholesale price for the <code>itemchoice</code>.
+</aside>
+
 
 # Images
 
