@@ -315,16 +315,16 @@ Create an item object by `POST`ing to `$API_BASE/items/`.
 
 Required:
 
-  - itemchoice ID
-  - size ID
-  - image ID
+  - `itemchoice_id`
+  - `size_id`
+  - `image_id`
 
 Optional:
 
-  - price
+  - `price`
     - If not provided, minimum advertised price for the style (itemchoice)
       will be used
-  - data
+  - `data`
     - JSON object of the form {'attributes': {'Key': 'Value', ...}}
 
 
