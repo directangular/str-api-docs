@@ -311,9 +311,22 @@ data = json.loads(res.content)
 print data['image_thumbnail'], data['pk']
 ```
 
-Create an item object by `POST`ing to `$API_BASE/items/` with an associated
-itemchoice ID, size ID, image ID, as well as other optional item
-properties.
+Create an item object by `POST`ing to `$API_BASE/items/`.
+
+Required:
+
+  - itemchoice ID
+  - size ID
+  - image ID
+
+Optional:
+
+  - price
+    - If not provided, minimum advertised price for the style (itemchoice)
+      will be used
+  - data
+    - JSON object of the form {'attributes': {'Key': 'Value', ...}}
+
 
 # Images
 
