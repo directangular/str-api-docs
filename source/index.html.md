@@ -244,6 +244,53 @@ requests to the server in an HTTP header that looks like the following:
 You must replace <code>&lt;token&gt;</code> with the personal access token.
 </aside>
 
+# Idempotency
+
+```shell
+# Duplicate request WITHOUT idempotency protection:
+$ curl $ENDPOINT -d $DATA \
+    -H 'Authorization: Bearer ...' \
+    -H "Content-Type: application/json"
+{"pk":15308091, ...}
+
+$ curl $ENDPOINT -d $DATA \
+    -H 'Authorization: Bearer ...' \
+    -H "Content-Type: application/json"
+{"pk":15308092, ...}
+
+# Duplicate request WITH idempotency protection:
+$ curl $ENDPOINT -d $DATA \
+    -H 'Authorization: Bearer ...' \
+    -H "Content-Type: application/json" \
+    -H 'X-Idempotency-Key: pizza123'
+{"pk":15308093, ...}
+
+$ curl $ENDPOINT -d $DATA \
+    -H 'Authorization: Bearer ...' \
+    -H "Content-Type: application/json" \
+    -H 'X-Idempotency-Key: pizza123'
+{"detail":"Duplicate request detected."}
+```
+
+The STR API can optionally enforce idempotency on HTTP POST requests.  This
+is to avoid the following scenario:
+
+1. Client sends HTTP POST to create invitem.
+1. STR backend creates the invitem and commits it to the database.
+1. Client loses network connectivity.
+1. STR backend tries to send back a success response, but is unable to do
+   so since the client lost network.
+1. The client never gets the "success" response, so assumes that the
+   request fails.  Client retries the request, creating a duplicate
+   invitem.
+
+A client can activate idempotency enforcement via the `X-Idempotency-Key`
+HTTP header.  The client can pass any arbitrary string, up to 128
+characters.  If another request comes in from the same user within 24 hours
+using the same value for the `X-Idempotency-Key` header the request will
+return an HTTP 403 with the error message: `"Duplicate request detected."`.
+See the shell session on the right for an example.
+
 # API Schema
 
 The remainder of this document will provide details on available endpoints
