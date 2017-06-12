@@ -373,12 +373,12 @@ Create an item object by `POST`ing to `$API_BASE/items/`.
       will be used
   - `data`
     - JSON object of the form `{'attributes': {'Key': 'Value', ...}}`
+  - `wholesale_price`
+    - If not provided, will be automatically populated based on the
+      wholesale price for the `itemchoice`.
 
-<aside class="notice">
-Note: the wholesale price will be automatically populated based on the
-wholesale price for the <code>itemchoice</code>.
-</aside>
-
+The full list of fields that can be set is
+in [the API schema](https://shoptheroe.com/api/v2/schema/).
 
 # Images
 
