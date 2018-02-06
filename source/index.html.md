@@ -13,12 +13,12 @@ search: true
 
 # Introduction
 
-Welcome to the ShopTheRoe API! You can use our API to access ShopTheRoe API
+Welcome to the Sonlet API! You can use our API to access Sonlet API
 endpoints, allowing you to build on top of our massive Direct Sales
 ecosystem.
 
-You can browse the API [here](https://shoptheroe.com/api/v2/) and view the
-full API schema [here](https://shoptheroe.com/api/v2/schema/).
+You can browse the API [here](https://sonlet.com/api/v2/) and view the
+full API schema [here](https://sonlet.com/api/v2/schema/).
 
 We have example projects set up for a few popular platforms that you can
 use for reference:
@@ -38,13 +38,13 @@ get everything done that you need.  In this guide we're using `python` and
 
 The `API` and `OAUTH` base urls for the staging and production sites are:
 
-### Staging (`https://beta.shoptheroe.com`)
-- `OAUTH_BASE` :: `https://beta.shoptheroe.com/o/`
-- `API_BASE` :: `https://beta.shoptheroe.com/api/v2/`
+### Staging (`https://beta.sonlet.com`)
+- `OAUTH_BASE` :: `https://beta.sonlet.com/o/`
+- `API_BASE` :: `https://beta.sonlet.com/api/v2/`
 
-### Production (`https://shoptheroe.com`)
-- `OAUTH_BASE` :: `https://shoptheroe.com/o/`
-- `API_BASE` :: `https://shoptheroe.com/api/v2/`
+### Production (`https://sonlet.com`)
+- `OAUTH_BASE` :: `https://sonlet.com/o/`
+- `API_BASE` :: `https://sonlet.com/api/v2/`
 
 <aside class="notice">
 Note: the trailing <code>/</code> <em>is important</em>.  The STR application
@@ -58,8 +58,8 @@ your oauth client will be broken if you forget the trailing <code>/</code>.
 
 ## Get an Access Token
 
-ShopTheRoe uses API keys and oauth2 to grant access to the API. You can
-register a new ShopTheRoe API key at
+Sonlet uses API keys and oauth2 to grant access to the API. You can
+register a new Sonlet API key at
 our [developer portal](https://www.popitup.com/developers).  You might also
 want to hop on [our Slack team](https://directangular-slack.herokuapp.com)
 to facilitate collaboration.
@@ -93,7 +93,7 @@ option when developing a mobile app.
 In order to request a personal access token for a user, just send them to
 the following URL:
 
-`https://shoptheroe.com/o/authorize/?response_type=token&client_id=$CLIENT_ID&state=random_state_string&redirect_uri=$REDIRECT_URI`
+`https://sonlet.com/o/authorize/?response_type=token&client_id=$CLIENT_ID&state=random_state_string&redirect_uri=$REDIRECT_URI`
 
 Make sure to replace `$CLIENT_ID` and `$REDIRECT_URI` with your client ID
 and desired redirect URI, respectively.
@@ -115,7 +115,7 @@ an example of how to register a custom schema handler and how to parse the
 > API.
 
 ```python
-OAUTH_BASE = 'https://shoptheroe.com/o/'
+OAUTH_BASE = 'https://sonlet.com/o/'
 TOKEN_URL = OAUTH_BASE + 'token/'
 
 # this is the redirect URI callback handler
@@ -162,7 +162,7 @@ The flow for the authorization grant type is a two-step process:
 
 To get the process started, just send the user to the following URL:
 
-`https://shoptheroe.com/o/authorize/?response_type=code&client_id=$CLIENT_ID&state=random_state_string&redirect_uri=$REDIRECT_URI`
+`https://sonlet.com/o/authorize/?response_type=code&client_id=$CLIENT_ID&state=random_state_string&redirect_uri=$REDIRECT_URI`
 
 Make sure to replace `$CLIENT_ID` and `$REDIRECT_URI` with your client ID
 and desired redirect URI, respectively.  The `REDIRECT_URI` will most
@@ -235,7 +235,7 @@ requests.get(endpoint_url, headers=headers)
 ```
 
 Once you have personal access token for a user, you can make API requests
-on their behalf.  ShopTheRoe expects the API key to be included in all API
+on their behalf.  Sonlet expects the API key to be included in all API
 requests to the server in an HTTP header that looks like the following:
 
 `Authorization: Bearer <token>`
@@ -295,7 +295,7 @@ See the shell session on the right for an example.
 
 The remainder of this document will provide details on available endpoints
 and their usage.  However, the definitive reference is the auto-generated
-API schema, [here](https://shoptheroe.com/api/v2/schema/).
+API schema, [here](https://sonlet.com/api/v2/schema/).
 
 # Items
 
@@ -304,7 +304,7 @@ API schema, [here](https://shoptheroe.com/api/v2/schema/).
 ```python
 import requests
 
-api_url = 'https://shoptheroe.com/api/v2/'
+api_url = 'https://sonlet.com/api/v2/'
 headers = {"Authorization": "Bearer " + access_token}
 res = requests.get(api_url + 'items/', headers)
 if res.status_code != 200:
@@ -314,7 +314,7 @@ print data['results'][0]['image']['image_thumbnail']
 ```
 
 This endpoint retrieves all items.  You can see what the response looks
-like in [the API browser](https://shoptheroe.com/api/v2/items/).  The
+like in [the API browser](https://sonlet.com/api/v2/items/).  The
 response is paged.
 
 ## Get a Specific Item
@@ -322,7 +322,7 @@ response is paged.
 ```python
 import requests
 
-api_url = 'https://shoptheroe.com/api/v2/'
+api_url = 'https://sonlet.com/api/v2/'
 headers = {"Authorization": "Bearer " + access_token}
 res = requests.get(api_url + 'items/<ITEM_ID>/', headers)
 if res.status_code != 200:
@@ -338,7 +338,7 @@ This endpoint retrieves a specific item.
 ```python
 import requests
 
-api_url = 'https://shoptheroe.com/api/v2/'
+api_url = 'https://sonlet.com/api/v2/'
 headers = {"Authorization": "Bearer " + access_token}
 data = {
     'itemchoice_id': itemchoice_id,
@@ -378,7 +378,7 @@ Create an item object by `POST`ing to `$API_BASE/items/`.
       wholesale price for the `itemchoice`.
 
 The full list of fields that can be set is
-in [the API schema](https://shoptheroe.com/api/v2/schema/).
+in [the API schema](https://sonlet.com/api/v2/schema/).
 
 # Images
 
@@ -387,7 +387,7 @@ in [the API schema](https://shoptheroe.com/api/v2/schema/).
 ```python
 import requests
 
-api_url = 'https://shoptheroe.com/api/v2/'
+api_url = 'https://sonlet.com/api/v2/'
 headers = {"Authorization": "Bearer " + access_token}
 res = requests.get(api_url + 'images/', headers)
 if res.status_code != 200:
@@ -397,7 +397,7 @@ print data['results'][0]['image_thumbnail']
 ```
 
 This endpoint retrieves all images.  You can see what the response looks
-like in [the API browser](https://shoptheroe.com/api/v2/images/).  The
+like in [the API browser](https://sonlet.com/api/v2/images/).  The
 response is paged.
 
 ## Get a Specific Image
@@ -405,7 +405,7 @@ response is paged.
 ```python
 import requests
 
-api_url = 'https://shoptheroe.com/api/v2/'
+api_url = 'https://sonlet.com/api/v2/'
 headers = {"Authorization": "Bearer " + access_token}
 res = requests.get(api_url + 'images/<IMAGE_ID>/', headers)
 if res.status_code != 200:
@@ -421,7 +421,7 @@ This endpoint retrieves a specific image.
 ```python
 import requests
 
-api_url = 'https://shoptheroe.com/api/v2/'
+api_url = 'https://sonlet.com/api/v2/'
 headers = {"Authorization": "Bearer " + access_token}
 with open('/tmp/my_image.png') as imgfile:
     files = {'image_full': imgfile}
@@ -444,7 +444,7 @@ to go along with the `Image`.
 ```python
 import requests
 
-api_url = 'https://shoptheroe.com/api/v2/'
+api_url = 'https://sonlet.com/api/v2/'
 headers = {"Authorization": "Bearer " + access_token}
 res = requests.get(api_url + 'itemchoices/', headers)
 if res.status_code != 200:
@@ -454,7 +454,7 @@ print data['results'][0]
 ```
 
 This endpoint retrieves all item choices.  You can see what the response looks
-like in [the API browser](https://shoptheroe.com/api/v2/itemchoices/).  The
+like in [the API browser](https://sonlet.com/api/v2/itemchoices/).  The
 response is paged.
 
 ## Get a Specific Item Choice
@@ -462,7 +462,7 @@ response is paged.
 ```python
 import requests
 
-api_url = 'https://shoptheroe.com/api/v2/'
+api_url = 'https://sonlet.com/api/v2/'
 headers = {"Authorization": "Bearer " + access_token}
 res = requests.get(api_url + 'itemchoices/<ITEMCHOICE_ID>/', headers)
 if res.status_code != 200:
@@ -480,7 +480,7 @@ This endpoint retrieves a specific item choice.
 ```python
 import requests
 
-api_url = 'https://shoptheroe.com/api/v2/'
+api_url = 'https://sonlet.com/api/v2/'
 headers = {"Authorization": "Bearer " + access_token}
 res = requests.get(api_url + 'sizes/', headers)
 if res.status_code != 200:
@@ -490,7 +490,7 @@ print data['results'][0]
 ```
 
 This endpoint retrieves all sizes.  You can see what the response looks
-like in [the API browser](https://shoptheroe.com/api/v2/sizes/).  The
+like in [the API browser](https://sonlet.com/api/v2/sizes/).  The
 response is paged.
 
 ## Get a Specific Size
@@ -498,7 +498,7 @@ response is paged.
 ```python
 import requests
 
-api_url = 'https://shoptheroe.com/api/v2/'
+api_url = 'https://sonlet.com/api/v2/'
 headers = {"Authorization": "Bearer " + access_token}
 res = requests.get(api_url + 'sizes/<SIZE_ID>/', headers)
 if res.status_code != 200:
