@@ -17,8 +17,9 @@ Welcome to the Sonlet API! You can use our API to access Sonlet API
 endpoints, allowing you to build on top of our massive Direct Sales
 ecosystem.
 
-You can browse the API [here](https://sonlet.com/api/v2/) and view the
-full API schema [here](https://sonlet.com/api/v2/schema/).
+You can browse the API [here](https://sonlet.com/api/v2/) and view the full
+API schema [here](https://sonlet.com/api/v2/schema/).  You must be logged
+in to browse the API.
 
 We have example projects set up for a few popular platforms that you can
 use for reference:
