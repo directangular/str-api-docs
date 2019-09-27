@@ -377,6 +377,8 @@ Create an item object by `POST`ing to `$API_BASE/items/`.
   - `wholesale_price`
     - If not provided, will be automatically populated based on the
       wholesale price for the `itemchoice`.
+  - `quantity`
+    - If not provided, will use a quantity of 1.
 
 The full list of fields that can be set is
 in [the API schema](https://sonlet.com/api/v2/schema/).
