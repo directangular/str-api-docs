@@ -345,6 +345,7 @@ data = {
     'itemchoice_id': itemchoice_id,
     'size_id': size_id,
     'image_id': image_id,
+    'quantity': 4,
     'data': json.dumps({  # optional!
         'attributes': {
             'Color': 'Red',
