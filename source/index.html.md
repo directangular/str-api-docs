@@ -56,10 +56,11 @@ your oauth client will be broken if you forget the trailing <code>/</code>.
 ## Get an Access Token
 
 Sonlet uses API keys and oauth2 to grant access to the API. You can
-register a new Sonlet API key at
-our [developer portal](https://www.popitup.com/developers).  You might also
-want to hop on [our Slack team](https://directangular-slack.herokuapp.com)
-to facilitate collaboration.
+register a new Sonlet API by sending an email to <a
+href="mailto:staff@directangular.com">staff@directangular.com</a>. You
+might also want to hop on [our Slack
+team](https://directangular-slack.herokuapp.com) to facilitate
+collaboration.
 
 Once you have credentials for your app, you can use our oauth2 endpoints to
 get a personal access token for the user.  The way you do that depends on
@@ -290,9 +291,8 @@ See the shell session on the right for an example.
 
 # API Schema
 
-The remainder of this document will provide details on available endpoints
-and their usage.  However, the definitive reference is the auto-generated
-API schema, [here](https://sonlet.com/api/v2/schema/).
+The remainder of this document will provide details on a few key endpoints
+and their usage.
 
 # Items
 
