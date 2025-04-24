@@ -1,0 +1,748 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>API Reference</title>
+
+    <style>
+      .highlight table td { padding: 5px; }
+.highlight table pre { margin: 0; }
+.highlight .gh {
+  color: #999999;
+}
+.highlight .sr {
+  color: #f6aa11;
+}
+.highlight .go {
+  color: #888888;
+}
+.highlight .gp {
+  color: #555555;
+}
+.highlight .gs {
+}
+.highlight .gu {
+  color: #aaaaaa;
+}
+.highlight .nb {
+  color: #f6aa11;
+}
+.highlight .cm {
+  color: #75715e;
+}
+.highlight .cp {
+  color: #75715e;
+}
+.highlight .c1 {
+  color: #75715e;
+}
+.highlight .cs {
+  color: #75715e;
+}
+.highlight .c, .highlight .cd {
+  color: #75715e;
+}
+.highlight .err {
+  color: #960050;
+}
+.highlight .gr {
+  color: #960050;
+}
+.highlight .gt {
+  color: #960050;
+}
+.highlight .gd {
+  color: #49483e;
+}
+.highlight .gi {
+  color: #49483e;
+}
+.highlight .ge {
+  color: #49483e;
+}
+.highlight .kc {
+  color: #66d9ef;
+}
+.highlight .kd {
+  color: #66d9ef;
+}
+.highlight .kr {
+  color: #66d9ef;
+}
+.highlight .no {
+  color: #66d9ef;
+}
+.highlight .kt {
+  color: #66d9ef;
+}
+.highlight .mf {
+  color: #ae81ff;
+}
+.highlight .mh {
+  color: #ae81ff;
+}
+.highlight .il {
+  color: #ae81ff;
+}
+.highlight .mi {
+  color: #ae81ff;
+}
+.highlight .mo {
+  color: #ae81ff;
+}
+.highlight .m, .highlight .mb, .highlight .mx {
+  color: #ae81ff;
+}
+.highlight .sc {
+  color: #ae81ff;
+}
+.highlight .se {
+  color: #ae81ff;
+}
+.highlight .ss {
+  color: #ae81ff;
+}
+.highlight .sd {
+  color: #e6db74;
+}
+.highlight .s2 {
+  color: #e6db74;
+}
+.highlight .sb {
+  color: #e6db74;
+}
+.highlight .sh {
+  color: #e6db74;
+}
+.highlight .si {
+  color: #e6db74;
+}
+.highlight .sx {
+  color: #e6db74;
+}
+.highlight .s1 {
+  color: #e6db74;
+}
+.highlight .s {
+  color: #e6db74;
+}
+.highlight .na {
+  color: #a6e22e;
+}
+.highlight .nc {
+  color: #a6e22e;
+}
+.highlight .nd {
+  color: #a6e22e;
+}
+.highlight .ne {
+  color: #a6e22e;
+}
+.highlight .nf {
+  color: #a6e22e;
+}
+.highlight .vc {
+  color: #ffffff;
+}
+.highlight .nn {
+  color: #ffffff;
+}
+.highlight .nl {
+  color: #ffffff;
+}
+.highlight .ni {
+  color: #ffffff;
+}
+.highlight .bp {
+  color: #ffffff;
+}
+.highlight .vg {
+  color: #ffffff;
+}
+.highlight .vi {
+  color: #ffffff;
+}
+.highlight .nv {
+  color: #ffffff;
+}
+.highlight .w {
+  color: #ffffff;
+}
+.highlight {
+  color: #ffffff;
+}
+.highlight .n, .highlight .py, .highlight .nx {
+  color: #ffffff;
+}
+.highlight .ow {
+  color: #f92672;
+}
+.highlight .nt {
+  color: #f92672;
+}
+.highlight .k, .highlight .kv {
+  color: #f92672;
+}
+.highlight .kn {
+  color: #f92672;
+}
+.highlight .kp {
+  color: #f92672;
+}
+.highlight .o {
+  color: #f92672;
+}
+    </style>
+    <link href="stylesheets/screen.css" rel="stylesheet" media="screen" />
+    <link href="stylesheets/print.css" rel="stylesheet" media="print" />
+      <script src="javascripts/all.js"></script>
+  </head>
+
+  <body class="index" data-languages="[&quot;python&quot;]">
+    <a href="#" id="nav-button">
+      <span>
+        NAV
+        <img src="images/navbar.png" alt="Navbar" />
+      </span>
+    </a>
+    <div class="tocify-wrapper">
+      <img src="images/logo.png" alt="Logo" />
+        <div class="lang-selector">
+              <a href="#" data-language-name="python">python</a>
+        </div>
+        <div class="search">
+          <input type="text" class="search" id="input-search" placeholder="Search">
+        </div>
+        <ul class="search-results"></ul>
+      <div id="toc">
+      </div>
+        <ul class="toc-footer">
+            <li><a href='https://www.popitup.com/developers'>Sign Up for a Developer Key</a></li>
+            <li><a href='https://github.com/tripit/slate'>Documentation Powered by Slate</a></li>
+        </ul>
+    </div>
+    <div class="page-wrapper">
+      <div class="dark-box"></div>
+      <div class="content">
+        <h1 id="introduction">Introduction</h1>
+
+<p>Welcome to the Sonlet API! You can use our API to access Sonlet API
+endpoints, allowing you to build on top of our massive Direct Sales
+ecosystem.</p>
+
+<p>We have example projects set up for a few popular platforms that you can
+use for reference:</p>
+
+<table><thead>
+<tr>
+<th>Platform</th>
+<th>Code</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Server-side web app</td>
+<td><a href="https://github.com/directangular/str-api-demo-web">GitHub</a></td>
+</tr>
+<tr>
+<td>Android</td>
+<td><a href="https://github.com/directangular/str-api-demo-android">GitHub</a></td>
+</tr>
+<tr>
+<td>iOS</td>
+<td>TODO</td>
+</tr>
+</tbody></table>
+
+<p>We&rsquo;re working on creating proper client libraries for popular languages,
+but in the meantime you can use any off-the-shelf HTTP request library to
+get everything done that you need.  In this guide we&rsquo;re using <code class="prettyprint">python</code> and
+<code class="prettyprint">requests</code>.</p>
+
+<h1 id="important-urls">Important URLs</h1>
+
+<p>The <code class="prettyprint">API</code> and <code class="prettyprint">OAUTH</code> base urls for the staging and production sites are:</p>
+
+<h3 id="staging-https-beta-sonlet-com">Staging (<code class="prettyprint">https://beta.sonlet.com</code>)</h3>
+
+<ul>
+<li><code class="prettyprint">OAUTH_BASE</code> :: <code class="prettyprint">https://beta.sonlet.com/o/</code></li>
+<li><code class="prettyprint">API_BASE</code> :: <code class="prettyprint">https://beta.sonlet.com/api/v2/</code></li>
+</ul>
+
+<h3 id="production-https-sonlet-com">Production (<code class="prettyprint">https://sonlet.com</code>)</h3>
+
+<ul>
+<li><code class="prettyprint">OAUTH_BASE</code> :: <code class="prettyprint">https://sonlet.com/o/</code></li>
+<li><code class="prettyprint">API_BASE</code> :: <code class="prettyprint">https://sonlet.com/api/v2/</code></li>
+</ul>
+
+<aside class="notice">
+Note: the trailing <code>/</code> <em>is important</em>.  The STR application
+servers redirect all requests that don&rsquo;t end in a <code>/</code> to the
+same URL with a <code>/</code> appended.  However, most oauth2 client
+libraries don&rsquo;t handle that redirect correctly, so the end result is that
+your oauth client will be broken if you forget the trailing <code>/</code>.
+</aside>
+
+<h1 id="authentication">Authentication</h1>
+
+<h2 id="get-an-access-token">Get an Access Token</h2>
+
+<p>Sonlet uses API keys and oauth2 to grant access to the API. You can
+register a new Sonlet API by sending an email to <a
+href="mailto:staff@directangular.com">staff@directangular.com</a>. You
+might also want to hop on <a href="https://directangular-slack.herokuapp.com">our Slack
+team</a> to facilitate
+collaboration.</p>
+
+<p>Once you have credentials for your app, you can use our oauth2 endpoints to
+get a personal access token for the user.  The way you do that depends on
+what kind of app you&rsquo;re developing.</p>
+
+<table><thead>
+<tr>
+<th>Application type</th>
+<th>Grant type</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Mobile app (iOS, Android, etc.)</td>
+<td>Implicit</td>
+</tr>
+<tr>
+<td>Web app (server-side)</td>
+<td>Authorization code</td>
+</tr>
+</tbody></table>
+
+<h3 id="implicit-grant-mobile-apps-ios-android-etc">Implicit Grant (Mobile apps (iOS, Android, etc))</h3>
+
+<p>Since the code in a mobile app is distributed to the user, you can&rsquo;t
+include your secret key in your code, since that would compromise your
+secret key and could result in abuse and blacklisting.  Instead, you rely
+on the resource owner (the user) to grant access.  The oauth2 specification
+refers to this as an &ldquo;implicit&rdquo; grant type, which you can read more
+about <a href="https://tools.ietf.org/html/rfc6749#section-4.2">here</a>.</p>
+
+<aside class="notice">
+Since this method doesn&rsquo;t include the secret key, it is a bit less secure
+and therefore doesn&rsquo;t support all of the features of other grant types.
+For example, refresh tokens are not supported when using the implicit grant
+type.  But to be clear, the implicit grant type is your <em>only</em>
+option when developing a mobile app.
+</aside>
+
+<p>In order to request a personal access token for a user, just send them to
+the following URL:</p>
+
+<p><code class="prettyprint">https://sonlet.com/o/authorize/?response_type=token&amp;client_id=$CLIENT_ID&amp;state=random_state_string&amp;redirect_uri=$REDIRECT_URI</code></p>
+
+<p>Make sure to replace <code class="prettyprint">$CLIENT_ID</code> and <code class="prettyprint">$REDIRECT_URI</code> with your client ID
+and desired redirect URI, respectively.</p>
+
+<p>Once the user authenticates and grants access to your application they&rsquo;ll
+be redirected to <code class="prettyprint">$REDIRECT_URI</code> with an <code class="prettyprint">access_token</code> parameter in the
+query fragment.  <code class="prettyprint">$REDIRECT_URI</code> should actually be a custom schema
+(e.g. <code class="prettyprint">my-cool-app://str-cb</code>) that you&rsquo;ve registered with your system.
+See
+<a href="https://github.com/directangular/str-api-demo-android">the Android STR API demo</a> for
+an example of how to register a custom schema handler and how to parse the
+<code class="prettyprint">access_token</code> out of the URL fragment.</p>
+
+<h3 id="authorization-code-grant-server-side-web-apps">Authorization Code Grant (Server-side Web Apps)</h3>
+
+<blockquote>
+<p>This is the redirect URI handler.  It will extract the code, exchange it
+for a set of tokens, save the tokens, and redirect the user to your app
+where the access token can be used to make authorized requests to the STR
+API.</p>
+</blockquote>
+<pre class="highlight python tab-python"><code><span class="n">OAUTH_BASE</span> <span class="o">=</span> <span class="s">'https://sonlet.com/o/'</span>
+<span class="n">TOKEN_URL</span> <span class="o">=</span> <span class="n">OAUTH_BASE</span> <span class="o">+</span> <span class="s">'token/'</span>
+
+<span class="c"># this is the redirect URI callback handler</span>
+<span class="nd">@route</span><span class="p">(</span><span class="s">'/cb'</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">cb</span><span class="p">():</span>
+    <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">'error'</span><span class="p">):</span>
+        <span class="c"># ...more error logging/handling...</span>
+        <span class="n">redirect</span><span class="p">(</span><span class="s">'/'</span><span class="p">)</span>
+        <span class="k">return</span>
+
+    <span class="c"># exchange the auth code for an access token</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s">"grant_type"</span><span class="p">:</span> <span class="s">"authorization_code"</span><span class="p">,</span>
+        <span class="s">"code"</span><span class="p">:</span> <span class="n">request</span><span class="o">.</span><span class="n">query</span><span class="p">[</span><span class="s">'code'</span><span class="p">],</span>
+        <span class="s">"redirect_uri"</span><span class="p">:</span> <span class="n">REDIRECT_URI</span><span class="p">,</span>
+        <span class="s">"client_id"</span><span class="p">:</span> <span class="n">CLIENT_ID</span><span class="p">,</span>
+        <span class="s">"client_secret"</span><span class="p">:</span> <span class="n">CLIENT_SECRET</span><span class="p">,</span>
+    <span class="p">}</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">TOKEN_URL</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">res</span><span class="o">.</span><span class="n">status_code</span> <span class="o">!=</span> <span class="mi">200</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">AuthenticationFailed</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
+    <span class="n">resp</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
+
+    <span class="n">user</span> <span class="o">=</span> <span class="n">get_current_user</span><span class="p">()</span>
+    <span class="n">user</span><span class="o">.</span><span class="n">save_tokens</span><span class="p">(</span><span class="n">resp</span><span class="p">[</span><span class="s">'access_token'</span><span class="p">],</span> <span class="n">resp</span><span class="p">[</span><span class="s">'refresh_token'</span><span class="p">])</span>
+    <span class="n">redirect</span><span class="p">(</span><span class="s">'/app'</span><span class="p">)</span>
+</code></pre>
+<p>For server-side apps, you&rsquo;ll use the secret access key to get a personal
+access token for the user.  The oauth2 spec refers to this as an
+&ldquo;Authorization code&rdquo; grant type, which you can read more
+about <a href="https://tools.ietf.org/html/rfc6749#section-4.1">here</a>.  This method
+offers a bit more security and features (like refresh tokens).</p>
+
+<p>As with all secret keys, you should <em>never</em> check your key in to your
+source code repo.  Instead, you can deploy it with your app using
+environment variables or similar.</p>
+
+<p>The flow for the authorization grant type is a two-step process:</p>
+
+<ol>
+<li>Send an authorization request (server responds with a <code class="prettyprint">code</code>)</li>
+<li>Send a token request using the <code class="prettyprint">code</code> from step 1 (server responds with
+an <code class="prettyprint">access_token</code>)</li>
+</ol>
+
+<p>To get the process started, just send the user to the following URL:</p>
+
+<p><code class="prettyprint">https://sonlet.com/o/authorize/?response_type=code&amp;client_id=$CLIENT_ID&amp;state=random_state_string&amp;redirect_uri=$REDIRECT_URI</code></p>
+
+<p>Make sure to replace <code class="prettyprint">$CLIENT_ID</code> and <code class="prettyprint">$REDIRECT_URI</code> with your client ID
+and desired redirect URI, respectively.  The <code class="prettyprint">REDIRECT_URI</code> will most
+likely be a custom endpoint in your app to handle oauth callbacks, for
+example: <code class="prettyprint">https://my-cool-app.example.com/str-cb</code>.</p>
+
+<p>Once the user authenticates and grants access to your application they&rsquo;ll
+be redirected to <code class="prettyprint">$REDIRECT_URI</code> with a <code class="prettyprint">code</code> parameter in the
+querystring.  You can then use the returned <code class="prettyprint">code</code> to get access/refresh
+tokens by posting to <code class="prettyprint">$OAUTH_BASE/token/</code> (see code example at the right).</p>
+
+<h4 id="refresh-tokens">Refresh Tokens</h4>
+
+<blockquote>
+<p>The <code class="prettyprint">access_token</code> can be used right away to make authorized API
+requests. The <code class="prettyprint">refresh_token</code>
+(<a href="https://tools.ietf.org/html/rfc6749#section-1.5">oauth2 spec</a>) can be
+used to get a new access token in the future:</p>
+</blockquote>
+<pre class="highlight python tab-python"><code><span class="c"># Swapping out a refresh token for a new access token</span>
+<span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s">'client_id'</span><span class="p">:</span> <span class="n">CLIENT_ID</span><span class="p">,</span>
+    <span class="s">'client_secret'</span><span class="p">:</span> <span class="n">CLIENT_SECRET</span><span class="p">,</span>
+    <span class="s">'grant_type'</span><span class="p">:</span> <span class="s">'refresh_token'</span><span class="p">,</span>
+    <span class="s">'refresh_token'</span><span class="p">:</span> <span class="n">REFRESH_TOKEN</span>
+<span class="p">}</span>
+<span class="n">res</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">oauth_url</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">res</span><span class="o">.</span><span class="n">status_code</span> <span class="o">!=</span> <span class="mi">200</span><span class="p">:</span>
+    <span class="k">raise</span> <span class="n">AuthenticationError</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
+<span class="n">resp</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
+<span class="n">user</span> <span class="o">=</span> <span class="n">get_current_user</span><span class="p">()</span>
+<span class="c"># save the new access/refresh tokens</span>
+<span class="n">user</span><span class="o">.</span><span class="n">save_tokens</span><span class="p">(</span><span class="n">resp</span><span class="p">[</span><span class="s">'access_token'</span><span class="p">],</span> <span class="n">resp</span><span class="p">[</span><span class="n">refresh_token</span><span class="s">'])</span><span class="err">
+</span></code></pre>
+<blockquote>
+<p>Generally you&rsquo;ll only do the refresh if a regular request returns an
+Unauthorized error (status code 401).  So you might use a wrapper like
+this:</p>
+</blockquote>
+<pre class="highlight python tab-python"><code><span class="k">def</span> <span class="nf">make_api_request</span><span class="p">(</span><span class="n">user</span><span class="p">,</span> <span class="n">endpoint</span><span class="p">):</span>
+    <span class="s">"""Simple wrapper that does a refresh if needed"""</span>
+    <span class="n">resp</span> <span class="o">=</span> <span class="n">_make_api_request</span><span class="p">(</span><span class="n">user</span><span class="o">.</span><span class="n">access_token</span><span class="p">,</span> <span class="n">endpoint</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">resp</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">401</span><span class="p">:</span>
+        <span class="n">user</span><span class="o">.</span><span class="n">refresh_tokens</span><span class="p">()</span>
+        <span class="n">resp</span> <span class="o">=</span> <span class="n">_make_api_request</span><span class="p">(</span><span class="n">user</span><span class="o">.</span><span class="n">access_token</span><span class="p">,</span> <span class="n">endpoint</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">resp</span>
+</code></pre>
+<p>All personal access tokens have a 14-day expiration on them.  In order to
+avoid making the user re-authorize your app by clicking through the oauth
+permissions dialog again, you can use the <code class="prettyprint">refresh_token</code> that gets
+returned alongside your <code class="prettyprint">access_token</code> to get a new personal access token.</p>
+
+<p>Most of the time you&rsquo;ll wait to refresh a token until you get an &ldquo;invalid
+token error&rdquo; with the current access token.
+See <a href="https://tools.ietf.org/html/rfc6749#section-1.5">this section</a> of the
+oauth2 spec for an example sequence diagram.  There&rsquo;s also an example on
+the right showing how you might do it.</p>
+
+<h2 id="use-the-access-token">Use the Access Token</h2>
+
+<blockquote>
+<p>To make an authorized request, just add an &ldquo;Authorization&rdquo; header with a
+personal access token:</p>
+</blockquote>
+<pre class="highlight python tab-python"><code><span class="n">headers</span> <span class="o">=</span> <span class="p">{</span><span class="s">"Authorization"</span><span class="p">:</span> <span class="s">"Bearer "</span> <span class="o">+</span> <span class="n">access_token</span><span class="p">}</span>
+<span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">endpoint_url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
+</code></pre>
+<p>Once you have personal access token for a user, you can make API requests
+on their behalf.  Sonlet expects the API key to be included in all API
+requests to the server in an HTTP header that looks like the following:</p>
+
+<p><code class="prettyprint">Authorization: Bearer &lt;token&gt;</code></p>
+
+<aside class="notice">
+You must replace <code>&lt;token&gt;</code> with the personal access token.
+</aside>
+
+<h1 id="idempotency">Idempotency</h1>
+<pre class="highlight shell tab-shell"><code><span class="c"># Duplicate request WITHOUT idempotency protection:</span>
+<span class="gp">$ </span>curl <span class="nv">$ENDPOINT</span> -d <span class="nv">$DATA</span> <span class="se">\</span>
+    -H <span class="s1">'Authorization: Bearer ...'</span> <span class="se">\</span>
+    -H <span class="s2">"Content-Type: application/json"</span>
+<span class="o">{</span><span class="s2">"pk"</span>:15308091, ...<span class="o">}</span>
+
+<span class="gp">$ </span>curl <span class="nv">$ENDPOINT</span> -d <span class="nv">$DATA</span> <span class="se">\</span>
+    -H <span class="s1">'Authorization: Bearer ...'</span> <span class="se">\</span>
+    -H <span class="s2">"Content-Type: application/json"</span>
+<span class="o">{</span><span class="s2">"pk"</span>:15308092, ...<span class="o">}</span>
+
+<span class="c"># Duplicate request WITH idempotency protection:</span>
+<span class="gp">$ </span>curl <span class="nv">$ENDPOINT</span> -d <span class="nv">$DATA</span> <span class="se">\</span>
+    -H <span class="s1">'Authorization: Bearer ...'</span> <span class="se">\</span>
+    -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+    -H <span class="s1">'X-Idempotency-Key: pizza123'</span>
+<span class="o">{</span><span class="s2">"pk"</span>:15308093, ...<span class="o">}</span>
+
+<span class="gp">$ </span>curl <span class="nv">$ENDPOINT</span> -d <span class="nv">$DATA</span> <span class="se">\</span>
+    -H <span class="s1">'Authorization: Bearer ...'</span> <span class="se">\</span>
+    -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+    -H <span class="s1">'X-Idempotency-Key: pizza123'</span>
+<span class="o">{</span><span class="s2">"detail"</span>:<span class="s2">"Duplicate request detected."</span><span class="o">}</span>
+</code></pre>
+<p>The STR API can optionally enforce idempotency on HTTP POST requests.  This
+is to avoid the following scenario:</p>
+
+<ol>
+<li>Client sends HTTP POST to create invitem.</li>
+<li>STR backend creates the invitem and commits it to the database.</li>
+<li>Client loses network connectivity.</li>
+<li>STR backend tries to send back a success response, but is unable to do
+so since the client lost network.</li>
+<li>The client never gets the &ldquo;success&rdquo; response, so assumes that the
+request fails.  Client retries the request, creating a duplicate
+invitem.</li>
+</ol>
+
+<p>A client can activate idempotency enforcement via the <code class="prettyprint">X-Idempotency-Key</code>
+HTTP header.  The client can pass any arbitrary string, up to 128
+characters.  If another request comes in from the same user within 24 hours
+using the same value for the <code class="prettyprint">X-Idempotency-Key</code> header the request will
+return an HTTP 403 with the error message: <code class="prettyprint">&quot;Duplicate request detected.&quot;</code>.
+See the shell session on the right for an example.</p>
+
+<h1 id="api-schema">API Schema</h1>
+
+<p>The remainder of this document will provide details on a few key endpoints
+and their usage.</p>
+
+<h1 id="items">Items</h1>
+
+<h2 id="get-all-items">Get All Items</h2>
+<pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
+
+<span class="n">api_url</span> <span class="o">=</span> <span class="s">'https://sonlet.com/api/v2/'</span>
+<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span><span class="s">"Authorization"</span><span class="p">:</span> <span class="s">"Bearer "</span> <span class="o">+</span> <span class="n">access_token</span><span class="p">}</span>
+<span class="n">res</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">api_url</span> <span class="o">+</span> <span class="s">'items/'</span><span class="p">,</span> <span class="n">headers</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">res</span><span class="o">.</span><span class="n">status_code</span> <span class="o">!=</span> <span class="mi">200</span><span class="p">:</span>
+    <span class="k">raise</span> <span class="n">AuthenticationError</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
+<span class="k">print</span> <span class="n">data</span><span class="p">[</span><span class="s">'results'</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s">'image'</span><span class="p">][</span><span class="s">'image_thumbnail'</span><span class="p">]</span>
+</code></pre>
+<p>This endpoint retrieves all items.  You can see what the response looks
+like in <a href="https://sonlet.com/api/v2/items/">the API browser</a>.  The
+response is paged.</p>
+
+<h2 id="get-a-specific-item">Get a Specific Item</h2>
+<pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
+
+<span class="n">api_url</span> <span class="o">=</span> <span class="s">'https://sonlet.com/api/v2/'</span>
+<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span><span class="s">"Authorization"</span><span class="p">:</span> <span class="s">"Bearer "</span> <span class="o">+</span> <span class="n">access_token</span><span class="p">}</span>
+<span class="n">res</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">api_url</span> <span class="o">+</span> <span class="s">'items/&lt;ITEM_ID&gt;/'</span><span class="p">,</span> <span class="n">headers</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">res</span><span class="o">.</span><span class="n">status_code</span> <span class="o">!=</span> <span class="mi">200</span><span class="p">:</span>
+    <span class="k">raise</span> <span class="n">AuthenticationError</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
+<span class="k">print</span> <span class="n">data</span><span class="p">[</span><span class="s">'image'</span><span class="p">][</span><span class="s">'image_thumbnail'</span><span class="p">]</span>
+</code></pre>
+<p>This endpoint retrieves a specific item.</p>
+
+<h2 id="create-an-item">Create an Item</h2>
+<pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
+
+<span class="n">api_url</span> <span class="o">=</span> <span class="s">'https://sonlet.com/api/v2/'</span>
+<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span><span class="s">"Authorization"</span><span class="p">:</span> <span class="s">"Bearer "</span> <span class="o">+</span> <span class="n">access_token</span><span class="p">}</span>
+<span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s">'itemchoice_id'</span><span class="p">:</span> <span class="n">itemchoice_id</span><span class="p">,</span>
+    <span class="s">'size_id'</span><span class="p">:</span> <span class="n">size_id</span><span class="p">,</span>
+    <span class="s">'image_id'</span><span class="p">:</span> <span class="n">image_id</span><span class="p">,</span>
+    <span class="s">'quantity'</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+    <span class="s">'data'</span><span class="p">:</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">({</span>  <span class="c"># optional!</span>
+        <span class="s">'attributes'</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s">'Color'</span><span class="p">:</span> <span class="s">'Red'</span><span class="p">,</span>
+            <span class="s">'Collection'</span><span class="p">:</span> <span class="s">'Elegant'</span><span class="p">,</span>
+        <span class="p">}</span>
+    <span class="p">}),</span>
+<span class="p">}</span>
+<span class="n">res</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">api_url</span> <span class="o">+</span> <span class="s">'items/'</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">res</span><span class="o">.</span><span class="n">status_code</span> <span class="o">!=</span> <span class="mi">200</span><span class="p">:</span>
+    <span class="k">raise</span> <span class="n">AuthenticationError</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
+<span class="k">print</span> <span class="n">data</span><span class="p">[</span><span class="s">'image_thumbnail'</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="s">'pk'</span><span class="p">]</span>
+</code></pre>
+<p>Create an item object by <code class="prettyprint">POST</code>ing to <code class="prettyprint">$API_BASE/items/</code>.</p>
+
+<h3 id="required">Required:</h3>
+
+<ul>
+<li><code class="prettyprint">itemchoice_id</code></li>
+<li><code class="prettyprint">size_id</code></li>
+<li><code class="prettyprint">image_id</code></li>
+</ul>
+
+<h3 id="optional">Optional:</h3>
+
+<ul>
+<li><code class="prettyprint">price</code>
+
+<ul>
+<li>If not provided, minimum advertised price for the style (itemchoice)
+will be used</li>
+</ul></li>
+<li><code class="prettyprint">data</code>
+
+<ul>
+<li>JSON object of the form <code class="prettyprint">{&#39;attributes&#39;: {&#39;Key&#39;: &#39;Value&#39;, ...}}</code></li>
+</ul></li>
+<li><code class="prettyprint">wholesale_price</code>
+
+<ul>
+<li>If not provided, will be automatically populated based on the
+wholesale price for the <code class="prettyprint">itemchoice</code>.</li>
+</ul></li>
+<li><code class="prettyprint">quantity</code>
+
+<ul>
+<li>If not provided, will use a quantity of 1.</li>
+</ul></li>
+</ul>
+
+<p>The full list of fields that can be set is
+in <a href="https://sonlet.com/api/v2/schema/">the API schema</a>.</p>
+
+<h1 id="images">Images</h1>
+
+<h2 id="get-all-images">Get All Images</h2>
+<pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
+
+<span class="n">api_url</span> <span class="o">=</span> <span class="s">'https://sonlet.com/api/v2/'</span>
+<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span><span class="s">"Authorization"</span><span class="p">:</span> <span class="s">"Bearer "</span> <span class="o">+</span> <span class="n">access_token</span><span class="p">}</span>
+<span class="n">res</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">api_url</span> <span class="o">+</span> <span class="s">'images/'</span><span class="p">,</span> <span class="n">headers</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">res</span><span class="o">.</span><span class="n">status_code</span> <span class="o">!=</span> <span class="mi">200</span><span class="p">:</span>
+    <span class="k">raise</span> <span class="n">AuthenticationError</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
+<span class="k">print</span> <span class="n">data</span><span class="p">[</span><span class="s">'results'</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s">'image_thumbnail'</span><span class="p">]</span>
+</code></pre>
+<p>This endpoint retrieves all images.  You can see what the response looks
+like in <a href="https://sonlet.com/api/v2/images/">the API browser</a>.  The
+response is paged.</p>
+
+<h2 id="get-a-specific-image">Get a Specific Image</h2>
+<pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
+
+<span class="n">api_url</span> <span class="o">=</span> <span class="s">'https://sonlet.com/api/v2/'</span>
+<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span><span class="s">"Authorization"</span><span class="p">:</span> <span class="s">"Bearer "</span> <span class="o">+</span> <span class="n">access_token</span><span class="p">}</span>
+<span class="n">res</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">api_url</span> <span class="o">+</span> <span class="s">'images/&lt;IMAGE_ID&gt;/'</span><span class="p">,</span> <span class="n">headers</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">res</span><span class="o">.</span><span class="n">status_code</span> <span class="o">!=</span> <span class="mi">200</span><span class="p">:</span>
+    <span class="k">raise</span> <span class="n">AuthenticationError</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
+<span class="k">print</span> <span class="n">data</span><span class="p">[</span><span class="s">'image_thumbnail'</span><span class="p">]</span>
+</code></pre>
+<p>This endpoint retrieves a specific image.</p>
+
+<h2 id="create-an-image">Create an Image</h2>
+<pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
+
+<span class="n">api_url</span> <span class="o">=</span> <span class="s">'https://sonlet.com/api/v2/'</span>
+<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span><span class="s">"Authorization"</span><span class="p">:</span> <span class="s">"Bearer "</span> <span class="o">+</span> <span class="n">access_token</span><span class="p">}</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">'/tmp/my_image.png'</span><span class="p">)</span> <span class="k">as</span> <span class="n">imgfile</span><span class="p">:</span>
+    <span class="n">files</span> <span class="o">=</span> <span class="p">{</span><span class="s">'image_full'</span><span class="p">:</span> <span class="n">imgfile</span><span class="p">}</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">api_url</span> <span class="o">+</span> <span class="s">'images/'</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">,</span> <span class="n">files</span><span class="o">=</span><span class="n">files</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">res</span><span class="o">.</span><span class="n">status_code</span> <span class="o">!=</span> <span class="mi">200</span><span class="p">:</span>
+    <span class="k">raise</span> <span class="n">AuthenticationError</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
+<span class="k">print</span> <span class="n">data</span><span class="p">[</span><span class="s">'image_thumbnail'</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="s">'pk'</span><span class="p">]</span>
+</code></pre>
+<p>You can create an image object by <code class="prettyprint">POST</code>ing to <code class="prettyprint">$API_BASE/images/</code>,
+providing a file object in the <code class="prettyprint">image_full</code> parameter.  Images aren&rsquo;t
+terribly useful on their own.  Generally you should also create an <code class="prettyprint">Item</code>
+to go along with the <code class="prettyprint">Image</code>.</p>
+
+<h1 id="item-choices-a-k-a-styles">Item Choices (a.k.a. &ldquo;styles&rdquo;)</h1>
+
+<h2 id="get-all-item-choices">Get All Item Choices</h2>
+<pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
+
+<span class="n">api_url</span> <span class="o">=</span> <span class="s">'https://sonlet.com/api/v2/'</span>
+<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span><span class="s">"Authorization"</span><span class="p">:</span> <span class="s">"Bearer "</span> <span class="o">+</span> <span class="n">access_token</span><span class="p">}</span>
+<span class="n">res</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">api_url</span> <span class="o">+</span> <span class="s">'itemchoices/'</span><span class="p">,</span> <span class="n">headers</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">res</span><span class="o">.</span><span class="n">status_code</span> <span class="o">!=</span> <span class="mi">200</span><span class="p">:</span>
+    <span class="k">raise</span> <span class="n">AuthenticationError</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
+<span class="k">print</span> <span class="n">data</span><span class="p">[</span><span class="s">'results'</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+</code></pre>
+<p>This endpoint retrieves all item choices.  You can see what the response looks
+like in <a href="https://sonlet.com/api/v2/itemchoices/">the API browser</a>.  The
+response is paged.</p>
+
+<h2 id="get-a-specific-item-choice">Get a Specific Item Choice</h2>
+<pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
+
+<span class="n">api_url</span> <span class="o">=</span> <span class="s">'https://sonlet.com/api/v2/'</span>
+<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span><span class="s">"Authorization"</span><span class="p">:</span> <span class="s">"Bearer "</span> <span class="o">+</span> <span class="n">access_token</span><span class="p">}</span>
+<span class="n">res</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">api_url</span> <span class="o">+</span> <span class="s">'itemchoices/&lt;ITEMCHOICE_ID&gt;/'</span><span class="p">,</span> <span class="n">headers</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">res</span><span class="o">.</span><span class="n">status_code</span> <span class="o">!=</span> <span class="mi">200</span><span class="p">:</span>
+    <span class="k">raise</span> <span class="n">AuthenticationError</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
+<span class="k">print</span> <span class="n">data</span>
+</code></pre>
+<p>This endpoint retrieves a specific item choice.</p>
+
+<h1 id="sizes">Sizes</h1>
+
+<h2 id="get-all-sizes">Get All Sizes</h2>
+<pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
+
+<span class="n">api_url</span> <span class="o">=</span> <span class="s">'https://sonlet.com/api/v2/'</span>
+<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span><span class="s">"Authorization"</span><span class="p">:</span> <span class="s">"Bearer "</span> <span class="o">+</span> <span class="n">access_token</span><span class="p">}</span>
+<span class="n">res</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">api_url</span> <span class="o">+</span> <span class="s">'sizes/'</span><span class="p">,</span> <span class="n">headers</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">res</span><span class="o">.</span><span class="n">status_code</span> <span class="o">!=</span> <span class="mi">200</span><span class="p">:</span>
+    <span class="k">raise</span> <span class="n">AuthenticationError</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
+<span class="k">print</span> <span class="n">data</span><span class="p">[</span><span class="s">'results'</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+</code></pre>
+<p>This endpoint retrieves all sizes.  You can see what the response looks
+like in <a href="https://sonlet.com/api/v2/sizes/">the API browser</a>.  The
+response is paged.</p>
+
+<h2 id="get-a-specific-size">Get a Specific Size</h2>
+<pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
+
+<span class="n">api_url</span> <span class="o">=</span> <span class="s">'https://sonlet.com/api/v2/'</span>
+<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span><span class="s">"Authorization"</span><span class="p">:</span> <span class="s">"Bearer "</span> <span class="o">+</span> <span class="n">access_token</span><span class="p">}</span>
+<span class="n">res</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">api_url</span> <span class="o">+</span> <span class="s">'sizes/&lt;SIZE_ID&gt;/'</span><span class="p">,</span> <span class="n">headers</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">res</span><span class="o">.</span><span class="n">status_code</span> <span class="o">!=</span> <span class="mi">200</span><span class="p">:</span>
+    <span class="k">raise</span> <span class="n">AuthenticationError</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
+<span class="k">print</span> <span class="n">data</span>
+</code></pre>
+<p>This endpoint retrieves a specific size.</p>
+
+      </div>
+      <div class="dark-box">
+          <div class="lang-selector">
+                <a href="#" data-language-name="python">python</a>
+          </div>
+      </div>
+    </div>
+  </body>
+</html>
